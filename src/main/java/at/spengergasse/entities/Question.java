@@ -1,32 +1,46 @@
 package at.spengergasse.entities;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity
-@Table(name="q_question")
+@Table(name = "q_questions")
+
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "q_id")
     private int id;
-   @Column (name = "q_text")
-   private String text;
-   @OneToMany
-   @JoinColumn(name = "fk_g_id")
-   private List<Answer> answerList = new ArrayList<>();
+
+    @Column(name = "q_text")
+    private String text;
+    @OneToMany
+    @JoinColumn(name = "fk_q_id")
+    private List<Answer> answerList = new ArrayList<Answer>();
+
+    public Question() {
+
+    }
 
     @Override
     public String toString() {
         return "Question{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", answerList=" + answerList +
                 '}';
+    }
+
+    public Question(String text) {
+        this.text = text;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -36,4 +50,6 @@ public class Question {
     public void setText(String text) {
         this.text = text;
     }
+
+
 }

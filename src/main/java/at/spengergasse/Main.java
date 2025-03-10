@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("demo")
                 .createEntityManager();
-TypedQuery<Question> query = em.createQuery("select q from Question q", Question.class);
+
+        TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q", Question.class);
         List<Question> questions = query.getResultList();
 
-        for (Question q : questions)
-        {
+        for (Question q : questions) {
             System.out.println(q);
         }
 
