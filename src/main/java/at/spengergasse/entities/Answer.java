@@ -1,11 +1,9 @@
 package at.spengergasse.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "a_answers")
-
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,20 +17,11 @@ public class Answer {
     private String text;
 
     public Answer() {
-
     }
+
     public Answer(boolean correct, String text) {
         this.correct = correct;
         this.text = text;
-    }
-
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", correct='" + correct + '\'' +
-                ", text='" + text + '\'' +
-                '}';
     }
 
     public int getId() {
@@ -43,7 +32,7 @@ public class Answer {
         this.id = id;
     }
 
-    public boolean getCorrect() {
+    public boolean isCorrect() {
         return correct;
     }
 
@@ -57,5 +46,14 @@ public class Answer {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id=" + id +
+                ", correct=" + correct +
+                ", text='" + text + '\'' +
+                '}';
     }
 }
