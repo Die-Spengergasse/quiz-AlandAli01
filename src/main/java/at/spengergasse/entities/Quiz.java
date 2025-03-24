@@ -21,19 +21,31 @@ public class Quiz {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        for (Question question : questions) {
+        int correctAnswers = 0;
+        int questionCount = Math.min(questions.size(), 5);
+
+        for (int i = 0; i < questionCount; i++) {
+            Question question = questions.get(i);
             System.out.println(question.getText());
-            for (int i = 0; i < question.getAnswerList().size(); i++) {
-                System.out.println((i + 1) + ". " + question.getAnswerList().get(i).getText());
+            List<Answer> answers = question.getAnswerList();
+            for (int j = 0; j < answers.size(); j++) {
+                System.out.println((j + 1) + ". " + answers.get(j).getText());
             }
-            System.out.print("Enter the number you think is correct: ");
+
+            System.out.print("Your answer: ");
             int userAnswer = scanner.nextInt();
-            if (question.getAnswerList().get(userAnswer - 1).isCorrect()) {
-                System.out.println("True!");
-            } else {
-                System.out.println("False!");
+
+            if (userAnswer > 0 && userAnswer <= answers.size() && answers.get(userAnswer - 1).isCorrect()) {
+                correctAnswers++;
             }
         }
-        scanner.close();
+
+        displayScore(correctAnswers, questionCount);
+    }
+
+    private void displayScore(int correctAnswers, int totalQuestions) {
+        double percentage = (double) correctAnswers / totalQuestions * 100;
+        System.out.println("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.");
+        System.out.println("Your score: " + percentage + "%");
     }
 }
